@@ -2,6 +2,11 @@
 
 Web App stores all files and their properties from local system in database. We can work wtih them through Flask framework
 
+## Запуск Linux
+
+- Cоздайте и активируйте venv: `python3 -m venv venv`, `source venv/bin/activate`
+- Установите требуемые библиотеки: `pip install -r requirements.txt`
+
 ## Документация
 
 ### <b>Запрещается</b>
