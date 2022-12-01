@@ -33,10 +33,10 @@ def upload_file(file_name):
         abort(400, "no subdirectories allowed")
     response = files_controller.upload_file(file_name, request)
 
-    return "file uploaded", 201
+    return response
 
 
 @files_page.route("/delete_file/<file_name>", methods=['DELETE'])
 def delete_file(file_name):
     response = files_controller.delete_file(file_name)
-    return "response"
+    return response

@@ -19,7 +19,7 @@ class FileController:
         try:
             return file.first().serialize
         except AttributeError as ex:
-            return "No such file"
+            return "No such file", 404
 
     def upload_file(self, file_name, request):
         try:
@@ -27,7 +27,7 @@ class FileController:
             with open(file_path, "wb") as file:
                 file.write(request.data)
         except Exception:
-            return "Can't upload file"
+            return "Can't upload file", 404
         try:
             new_row = Files(
                 name=file_name,
@@ -41,7 +41,7 @@ class FileController:
             self.session.add(new_row)
             self.session.commit()
         except Exception:
-            return "Can't add file to database"
+            return "Can't add file to database", 404
 
     def delete_file(self, file_name):
         file = self.session.query(Files).filter(
@@ -49,3 +49,5 @@ class FileController:
         self.session.delete(file)
         self.session.commit()
         os.remove(file.full_path)
+
+        return "File deleted", 200
