@@ -1,17 +1,30 @@
-from files import Files
-import session_db
+from flask import Blueprint, jsonify, render_template, abort
+from models import files, session_db
+
+files_page = Blueprint('files_page', __name__)
+
+session = session_db.Session()
 
 
-def add_user_db():
-    sess = session_db.create_session()
-    file = Files()
-    file.name = "test"
-    file.file_type = ".txt"
-    file.full_path = "venv/bin"
-
-    file.size = 1234
-    sess.add(file)
-    sess.commit()
+@files_page.route("/")
+def hello():
+    return "<h1>SERVER IS UP</h1>"
 
 
-add_user_db()
+@files_page.route("/get_all_files")
+def get_all_files():
+    resp = session.query(files.Files)
+
+    return jsonify(json_list=[row.serialize for row in resp.all()])
+
+
+# @app.route("/files/<filename>", methods=["POST"])
+# def post_file(filename):
+#     """Upload a file."""
+#     if "/" in filename:
+#         abort(400, "no subdirectories allowed")
+
+#     with open(os.path.join(UPLOAD_DIRECTORY, filename), "wb") as fp:
+#         fp.write(request.data)
+
+#     return "file uploaded", 201

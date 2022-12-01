@@ -1,3 +1,3 @@
 git add .
-git commit -m "models done"
+git commit -m "some blueprint views done"
 git push

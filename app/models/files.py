@@ -40,8 +40,7 @@ class Files(SqlAlchemyBase):
         nullable=True
     )
 
-    def __init__(self, id, name, file_type, size, full_path, created_date, modified_date, description):
-        self.id = id
+    def __init__(self, name, file_type, size, full_path, created_date, modified_date, description):
         self.name = name
         self.file_type = file_type
         self.size = size
@@ -61,3 +60,17 @@ class Files(SqlAlchemyBase):
         {self.modified_date} = modified_date, 
         {self.description} = description.
         '''
+
+    @property
+    def serialize(self):
+        """Return object data in easily serializable format"""
+        return {
+            "id": self.id,
+            "name": self.name,
+            "file_type": self.file_type,
+            "size": self.size,
+            "full_path": self.full_path,
+            "created_date": self.created_date,
+            "modified_date": self.modified_date,
+            "description": self.description
+        }
