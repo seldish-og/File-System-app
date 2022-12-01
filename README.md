@@ -6,6 +6,11 @@ Web App stores all files and their properties from local system in database. We 
 
 - Cоздайте и активируйте venv: `python3 -m venv venv`, `source venv/bin/activate`
 - Установите требуемые библиотеки: `pip install -r requirements.txt`
+- В файле <b>./app/.env</b> пропишите настройки вашей Postgresql бд и укажите MAIN_PATH (папку откуда начинать сбор файлов)
+- Запустите `python app/main.py`
+
+База данных инициализируется автоматически при первом запуске приложения.(Создается таблица и заполняется файлами) <br>
+Название таблицы - <b>all_files</b>
 
 ## Документация
 

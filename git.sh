@@ -1,3 +1,3 @@
 git add .
-git commit -m "download file on user_pc done"
+git commit -m "some updates"
 git push
