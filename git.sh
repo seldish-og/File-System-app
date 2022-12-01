@@ -1,3 +1,3 @@
 git add .
-git commit -m "upload files done v&c"
+git commit -m "updated uploading and create deleting"
 git push

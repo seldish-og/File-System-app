@@ -22,5 +22,30 @@ class FileController:
             return "No such file"
 
     def upload_file(self, file_name, request):
-        with open(f"{self.upload_dir}{file_name}", "wb") as file:
-            file.write(request.data)
+        try:
+            file_path = f"{self.upload_dir}{file_name}"
+            with open(file_path, "wb") as file:
+                file.write(request.data)
+        except Exception:
+            return "Can't upload file"
+        try:
+            new_row = Files(
+                name=file_name,
+                file_type=file_name.split('.')[-1],
+                full_path=file_path,
+                size=os.path.getsize(file_path),
+                created_date=os.path.getctime(file_path),
+                modified_date=os.path.getmtime(file_path),
+                description=''
+            )
+            self.session.add(new_row)
+            self.session.commit()
+        except Exception:
+            return "Can't add file to database"
+
+    def delete_file(self, file_name):
+        file = self.session.query(Files).filter(
+            Files.name == file_name).first()
+        self.session.delete(file)
+        self.session.commit()
+        os.remove(file.full_path)

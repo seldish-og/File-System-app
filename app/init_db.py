@@ -40,7 +40,6 @@ class DbCreator:
                 description=''
             )
             session.add(sql_row)
-            # print(file_name, file_type)
         session.commit()
 
     def create_database(self):

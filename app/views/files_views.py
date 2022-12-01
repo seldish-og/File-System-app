@@ -26,7 +26,7 @@ def get_file(file_name):
     return jsonify(response)
 
 
-@files_page.route("/upload_file/<file_name>", methods=["GET", "POST"])
+@files_page.route("/upload_file/<file_name>", methods=["POST"])
 def upload_file(file_name):
     """Upload a file."""
     if "/" in file_name:
@@ -34,3 +34,9 @@ def upload_file(file_name):
     response = files_controller.upload_file(file_name, request)
 
     return "file uploaded", 201
+
+
+@files_page.route("/delete_file/<file_name>", methods=['DELETE'])
+def delete_file(file_name):
+    response = files_controller.delete_file(file_name)
+    return "response"
