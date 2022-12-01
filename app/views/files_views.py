@@ -1,5 +1,5 @@
 from models import file_model, session_db
-from flask import Blueprint, abort, jsonify, request
+from flask import Blueprint, abort, jsonify, request, send_file, send_from_directory
 from controllers import files_controllers
 
 files_page = Blueprint('files_page', __name__)
@@ -49,3 +49,12 @@ def get_file_bypath():
     response = files_controller.get_file_bypath(path)
 
     return jsonify(response)
+
+
+@files_page.route('/download_file/<name>')
+def download_file(name):
+    full_path = files_controller.get_files_folder(name)
+    try:
+        return send_file(full_path, as_attachment=True), "FILE WAS SENT"
+    except Exception:
+        return "WRONG FILE"

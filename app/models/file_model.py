@@ -19,11 +19,11 @@ class Files(SqlAlchemyBase):
     )
     file_type = sqlalchemy.Column(
         sqlalchemy.String,
-        nullable=True
+        nullable=False
     )
     size = sqlalchemy.Column(
         sqlalchemy.Integer,
-        nullable=True
+        nullable=False
     )
     full_path = sqlalchemy.Column(
         sqlalchemy.String,
@@ -38,8 +38,7 @@ class Files(SqlAlchemyBase):
         default=datetime.datetime.utcnow
     )
     description = sqlalchemy.Column(
-        sqlalchemy.Text,
-        nullable=True
+        sqlalchemy.Text
     )
 
     def __init__(self, name, file_type, size, full_path, created_date, modified_date, description):

@@ -60,3 +60,11 @@ class FileController:
         if not json_list:
             return f"NO FILES STARTS WITH <<{path}>> WERE FOUND "
         return json_list
+
+    def get_files_folder(self, file_name):
+        file = self.session.query(Files).filter(Files.name == file_name)
+        try:
+            print("hey")
+            return file.first().full_path
+        except AttributeError as ex:
+            return "No such file", 404
