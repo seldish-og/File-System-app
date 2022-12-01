@@ -2,7 +2,7 @@ import os
 from models import session_db
 from datetime import datetime
 from models.session_db import create_db, Session
-from models.files import Files
+from models.file_model import Files
 
 
 class DbCreator:
