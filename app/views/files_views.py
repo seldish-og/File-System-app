@@ -40,3 +40,12 @@ def upload_file(file_name):
 def delete_file(file_name):
     response = files_controller.delete_file(file_name)
     return response
+
+
+@files_page.route("/get_file_bypath/", methods=['GET'])
+def get_file_bypath():
+    path = request.args.get("path")
+    print(path)
+    response = files_controller.get_file_bypath(path)
+
+    return jsonify(response)

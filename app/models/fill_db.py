@@ -1,13 +1,11 @@
 import os
-from models import session_db
 from datetime import datetime
-from models.session_db import create_db, Session
 from models.file_model import Files
 
 
-class DbCreator:
-    def __init__(self) -> None:
-        self.main_path = "/home/avrelian/Desktop/resumes&todo_tasks"
+class DbFiller:
+    def __init__(self, main_path) -> None:
+        self.main_path = main_path
 
     def get_all_files(self, path):
         dirs = os.listdir(path)
@@ -27,7 +25,7 @@ class DbCreator:
                 all_files.append(item)
         return all_files
 
-    def fill_db(self, session: Session):
+    def fill_db(self, session):
         all_files = self.get_all_files(self.main_path)
         for file in all_files:
             file_name = file[0].split('/')[-1]
@@ -41,10 +39,3 @@ class DbCreator:
             )
             session.add(sql_row)
         session.commit()
-
-    def create_database(self):
-        create_db()
-
-
-db_cr = DbCreator()
-db_cr.fill_db(Session())

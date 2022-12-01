@@ -1,6 +1,8 @@
 import datetime
 import sqlalchemy
-from .session_db import SqlAlchemyBase
+import sqlalchemy.ext.declarative as dec
+
+SqlAlchemyBase = dec.declarative_base()
 
 
 class Files(SqlAlchemyBase):

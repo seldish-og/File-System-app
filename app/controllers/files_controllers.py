@@ -51,3 +51,12 @@ class FileController:
         os.remove(file.full_path)
 
         return "File deleted", 200
+
+    def get_file_bypath(self, path):
+        files = self.session.query(Files).filter(
+            Files.full_path.like(f'{path}%'))
+        json_list = [row.serialize for row in files.all()]
+
+        if not json_list:
+            return f"NO FILES STARTS WITH <<{path}>> WERE FOUND "
+        return json_list
