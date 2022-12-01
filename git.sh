@@ -1,3 +1,3 @@
 git add .
-git commit -m "get view and controllers done"
+git commit -m "upload files done v&c"
 git push
